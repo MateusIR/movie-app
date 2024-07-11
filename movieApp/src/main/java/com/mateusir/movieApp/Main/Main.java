@@ -1,8 +1,10 @@
 package com.mateusir.movieApp.Main;
 
 import com.mateusir.movieApp.Models.*;
+import com.mateusir.movieApp.Repository.SerieRepository;
 import com.mateusir.movieApp.Service.ConsumeAPI;
 import com.mateusir.movieApp.Service.ConverteDados;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +22,11 @@ public class Main {
     private final String ENDERECO = "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=6585022c";
     private List<DadosSerie> dadosSeries = new ArrayList<>();
+    private SerieRepository serieRepository;
+    public Main(SerieRepository serieRepository) {
+        this.serieRepository = serieRepository;
+    }
+
 
     public void exibirMenu() {
         var opcao = -1;
@@ -57,7 +64,9 @@ public class Main {
 
     private void buscarSerieWeb() {
         DadosSerie dados = getDadosSerie();
-        dadosSeries.add(dados);
+        Serie serie = new Serie(dados);
+        serieRepository.save(serie);
+
         System.out.println(dados);
     }
 
@@ -83,9 +92,7 @@ public class Main {
 
     private void listarSeriesBuscadas(){
         List<Serie> series = new ArrayList<>();
-        series = dadosSeries.stream()
-                .map(d -> new Serie(d))
-                .collect(Collectors.toList());
+        series = serieRepository.findAll();
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenero))
                 .forEach(System.out::println);

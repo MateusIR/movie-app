@@ -2,17 +2,37 @@ package com.mateusir.movieApp.Models;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.mateusir.movieApp.Service.ConsultaChatGPT;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-
+@Entity
+@Table(name = "series")
 public class Serie {
+
+    @Column(unique = true)
     private String titulo;
+
     private Integer totalTemporadas;
+
     private Double  avaliacao ;
+
     private String  descricao;
+
+    @Enumerated(EnumType.STRING)
     private Categoria genero;
+
     private String atores;
+
     private String poster;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Transient
+    private List<Episodio> episodios = new ArrayList<>();
 
     public Serie(DadosSerie dadosSerie){
         this.titulo = dadosSerie.titulo();
@@ -22,6 +42,10 @@ public class Serie {
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
         this.atores = dadosSerie.atores();
         this.poster = dadosSerie.poster();
+    }
+
+    public Serie() {
+
     }
 
     public String getTitulo() {
@@ -80,6 +104,10 @@ public class Serie {
         this.poster = poster;
     }
 
+    public void setId(Long id) { this.id = id; }
+
+    public Long getId() { return id; }
+
     @Override
     public String toString() {
         return "titulo='" + titulo + '\'' +
@@ -90,6 +118,8 @@ public class Serie {
                 ", atores='" + atores + '\'' +
                 ", poster='" + poster + '\'' ;
     }
+
+
 }
 
 
