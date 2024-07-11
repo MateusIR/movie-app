@@ -31,7 +31,7 @@ public class Serie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Transient
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Episodio> episodios = new ArrayList<>();
 
     public Serie(DadosSerie dadosSerie){
@@ -108,6 +108,15 @@ public class Serie {
 
     public Long getId() { return id; }
 
+    public List<Episodio> getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(List<Episodio> episodios) {
+        episodios.forEach(episodio -> episodio.setSerie(this));
+        this.episodios = episodios;
+    }
+
     @Override
     public String toString() {
         return "titulo='" + titulo + '\'' +
@@ -116,8 +125,10 @@ public class Serie {
                 ", descricao='" + descricao + '\'' +
                 ", genero=" + genero +
                 ", atores='" + atores + '\'' +
-                ", poster='" + poster + '\'' ;
+                ", poster='" + poster + '\'' +
+                ", episodios='" + episodios + '\'' ;
     }
+
 
 
 }

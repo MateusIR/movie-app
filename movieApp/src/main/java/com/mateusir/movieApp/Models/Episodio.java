@@ -1,16 +1,26 @@
 package com.mateusir.movieApp.Models;
 
+import jakarta.persistence.*;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
-
+@Entity
+@Table(name = "episodios")
 public class Episodio {
     private Integer temporada;
     private String titulo;
     private Integer numero;
     private Double avaliacao;
     private LocalDate dataLancamento;
+
+    @ManyToOne
+    private Serie serie;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
 
     public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio){
@@ -30,6 +40,17 @@ public class Episodio {
 
     }
 
+    public Episodio() {
+
+    }
+
+    public Serie getSerie() {
+        return serie;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -80,5 +101,13 @@ public class Episodio {
                 ", avaliacao=" + avaliacao +
                 ", dataLancamento=" + dataLancamento;
 
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
