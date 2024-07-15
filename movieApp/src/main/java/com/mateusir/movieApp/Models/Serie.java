@@ -1,7 +1,7 @@
 package com.mateusir.movieApp.Models;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
-import com.mateusir.movieApp.Service.ConsultaChatGPT;
+//import com.mateusir.movieApp.Service.ConsultaChatGPT;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -38,7 +38,8 @@ public class Serie {
         this.titulo = dadosSerie.titulo();
         this.totalTemporadas = dadosSerie.totalTemporadas();
         this.avaliacao = Optional.of(Double.valueOf(dadosSerie.avaliacao())).orElse((double) 0);
-        this.descricao = ConsultaChatGPT.obterTraducao(dadosSerie.descricao()).trim();;
+//        this.descricao = ConsultaChatGPT.obterTraducao(dadosSerie.descricao()).trim();;
+        this.descricao = dadosSerie.descricao();
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
         this.atores = dadosSerie.atores();
         this.poster = dadosSerie.poster();

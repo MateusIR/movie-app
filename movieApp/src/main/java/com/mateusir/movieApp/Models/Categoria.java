@@ -11,8 +11,10 @@ public enum Categoria {
     ROMANCE("Romance");
 
     private String categoriaOmdb;
-    Categoria(String categoriaOmdb) {}
 
+    Categoria(String categoriaOmdb) {
+        this.categoriaOmdb = categoriaOmdb;
+    }
 
     public static Categoria fromString(String text) {
         for (Categoria categoria : Categoria.values()) {
@@ -22,6 +24,4 @@ public enum Categoria {
         }
         throw new IllegalArgumentException("Nenhuma categoria encontrada para a string fornecida: " + text);
     }
-
 }
-
