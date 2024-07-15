@@ -130,4 +130,18 @@ public class Main {
                 .sorted(Comparator.comparing(Serie::getGenero))
                 .forEach(System.out::println);
     }
+
+    private void listarTopSeries(){
+        List<Serie> topSeries = SerieRepository.findTop5ByOrderByAvaliacaoDesc();
+        topSeries.forEach(System.out::println);
+    }
+
+//    private void buscarSeriePorGenero(){
+//        System.out.println("Escolha uma categoria pelo nome");
+//        var nomeCategoria = leitura.nextLine();
+//        Categoria categoria = Categoria.fromString(nomeCategoria);
+//        List<Serie> serie = serieRepository.findByGenero(String.valueOf(categoria));
+//        serie.forEach(System.out::println);
+//    }
+
 }
