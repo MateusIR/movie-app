@@ -17,19 +17,15 @@ import java.util.List;
 import java.util.Scanner;
 
 @SpringBootApplication
-public class MovieAppApplication implements CommandLineRunner{
-	@Autowired
-	private SerieRepository serieRepository;
+public class MovieAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MovieAppApplication.class, args);
 
 	}
 
-	@Override
+
 	public void run(String... args) throws Exception {
-		Scanner input = new Scanner(System.in);
-		Main main = new Main(serieRepository);
-		main.exibirMenu();
+
 
 
 	}
