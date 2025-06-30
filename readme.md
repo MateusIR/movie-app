@@ -34,7 +34,6 @@ O MovieApp oferece as seguintes funcionalidades principais:
 A API RESTful expõe diversos endpoints para interagir com as séries e episódios armazenados:
 
   * **`GET /series`**: Retorna uma lista de todas as séries salvas.
-  * **`GET /series/inicio`**: Um endpoint de teste simples que retorna a mensagem "opa, bom dia".
   * **`GET /series/top5`**: Retorna as 5 séries com a melhor avaliação (IMDB Rating).
   * **`GET /series/lancamentos`**: Retorna as 5 séries mais recentes com base na data de lançamento dos seus episódios.
   * **`GET /series/{id}`**: Retorna os detalhes de uma série específica pelo seu ID.
